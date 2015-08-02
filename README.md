@@ -5,7 +5,7 @@ It will be better to create a RDD with a custom record reader and the reader han
 The reader should be a generic interface. When creating a RDD, an implementation of reader is provided so we can
 have uniform API for a range of file formats and data sources.
 
-The objective of the change is only to add API to handle demilited files. The source is for Saprk 1.3.1.
+The objective of the change is only to add API to handle demilited text files. The source code is for Saprk 1.3.1.
 
 The example file is tab demilited text file. It has two columns, id and name as below.
  |:----- | -------:|
@@ -29,6 +29,17 @@ val fd = file.dfilter(0, x => x.toInt > 1)
 fd.collect
 //res2: Array[String] = Array(2   joe, 3  jhon)
 ```
+
+For a more generic form, I use a DataBlock to represent a row readed from text source. So we can set schema of the 
+DataBlock and apply function simply like below.
+
+```
+val file = sc.delimitFile("/home/xxia/tab.txt", "\t", Seq("a:Int", "b:String"))
+val fd = file.map(x => x("b") + "d")
+fd.collect
+```
+
+Here the x("b") is the column 2 of current row. The source code is under directory core1.4.1 and for Spark 1.4.1.
 
 That's it.
 
