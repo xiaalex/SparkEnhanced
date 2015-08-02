@@ -35,10 +35,11 @@ fd.collect
 For a more generic form, I use a DataBlock to represent a row readed from text source. So we can set schema of the 
 DataBlock and apply function simply like below.
 
-```
+```scala
 val file = sc.delimitFile("/home/xxia/tab.txt", "\t", Seq("a:Int", "b:String"))
 val fd = file.map(x => x("b") + "d")
 fd.collect
+// res0: Array[org.apache.spark.util.DataBlock] = Array(1 : 1 alexd, 1 : 2 joed, 1 : 3 jhond)
 ```
 
 Here the x("b") is the column 2 of current row. The source code is under directory core1.4.1 and for Spark 1.4.1.
