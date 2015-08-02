@@ -8,10 +8,12 @@ have uniform API for a range of file formats and data sources.
 The objective of the change is only to add API to handle demilited text files. The source code is for Saprk 1.3.1.
 
 The example file is tab demilited text file. It has two columns, id and name as below.
- |:----- | -------:|
+
+```
  | 1     |    alex |
  | 2     |     joe |
  | 3     |    jhon |
+```
 
 I have create a "delimitFile" to create a RDD. It has two new function "dmap" and "dfilter". I use the index
 to access each coulmn for now. I will add the name access later.
